@@ -12,7 +12,7 @@ struct LandmarkList: View {
     var body: some View {
         NavigationView {
             List(landmarkData) { landmark in
-                NavigationLink(destination: LandmarkDetail()) {
+                NavigationLink(destination: LandmarkDetail(landmark: landmark)) {
                     LandmarkRow(landmark: landmark)
                 }
             }
@@ -24,6 +24,12 @@ struct LandmarkList: View {
 
 struct LandmarkList_Prewviews: PreviewProvider {
     static var previews: some View {
-        LandmarkList()
+        ForEach(["iPhone 11 Pro Max", "iPhone 11 Pro", "iPhone 8"], id: \.self) { deviceName in
+            LandmarkList()
+            .previewDevice(PreviewDevice(rawValue: deviceName))
+            .previewDisplayName(deviceName)
+        }
+        
+            
     }
 }
